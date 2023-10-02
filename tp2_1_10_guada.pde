@@ -182,13 +182,12 @@ void draw() {
   inicio= loadImage("inicio.jpg");
   tiempo= loadImage("perder.jpg");
   ganar= loadImage("ganar.jpg");
-//  dia= loadImage("dia.png");
+ dia= loadImage("dia.png");
  // noche= loadImage("noche.png");
   switch (estado) {
   case 0: // Estado de inicio
     // Dibuja la imagen de inicio
     //image(inicio, 0, 0);
-
     inicio.resize(1400, 1000);
     image(inicio, 0, 0);
     break;
@@ -240,6 +239,15 @@ void draw() {
     textAlign(CENTER, CENTER);
     fill(0); // Texto negro
     //text("Completaste el juego en " + nf(millis() - tiempoInicial), width / 2, height / 2);
+    break;
+    
+    case 4: //pantalla de instrucciones
+    dia.resize(1400, 1000);
+    image(dia, 0, 0);
+    textSize(32);
+    textAlign(CENTER, CENTER);
+    fill(0); // Texto negro
+    text("Usá las flechas de izquierda y derecha para rotar el canvas y mover al personaje", width / 2, height / 2);
     break;
   }
 }
@@ -489,6 +497,11 @@ void mouseClicked() {
     estado=1;
     println("Juego");
     }
+    if (mouseX > 1130 - 200 && mouseX < 1130 + 200 && mouseY > 180 - 100 && mouseY < 180 + 100) {
+    // Si el clic está dentro del rectángulo, empieza juego
+    estado=4;
+    println("Juego");
+    }
       break;
     case 1:
       // Estado de juego: código para el clic en el estado de juego
@@ -505,6 +518,9 @@ void mouseClicked() {
     estado=0;
     println("Juego");
    
+      break;
+      case 4:
+      estado=1;
       break;
   
   }
