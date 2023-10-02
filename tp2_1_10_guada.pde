@@ -182,8 +182,8 @@ void draw() {
   inicio= loadImage("inicio.jpg");
   tiempo= loadImage("perder.jpg");
   ganar= loadImage("ganar.jpg");
- dia= loadImage("dia.png");
- // noche= loadImage("noche.png");
+  dia= loadImage("dia.png");
+  // noche= loadImage("noche.png");
   switch (estado) {
   case 0: // Estado de inicio
     // Dibuja la imagen de inicio
@@ -193,7 +193,7 @@ void draw() {
     break;
 
   case 1: // Estado de juego
-   // dia.resize(1400,900);
+    // dia.resize(1400,900);
     //image(dia, 0, 0);
     // Muestra el tiempo restante en la pantalla
     textSize(30);
@@ -201,7 +201,7 @@ void draw() {
     text(nf(minutos, 2) + ":" + nf(segundos, 2), 100, 40);
     fill(0);
 
-    // Esta parte la usaríamos para la pantalla de perder
+    // Pantalla de perder
     if (tiempoRestante <= 0) {
       estado=2;
     }
@@ -232,7 +232,6 @@ void draw() {
     break;
 
   case 3: // Estado de victoria
-    // Dibuja la imagen de victoria
     ganar.resize(1400, 1000);
     image(ganar, 0, 0);
     textSize(32);
@@ -240,8 +239,8 @@ void draw() {
     fill(0); // Texto negro
     //text("Completaste el juego en " + nf(millis() - tiempoInicial), width / 2, height / 2);
     break;
-    
-    case 4: //pantalla de instrucciones
+
+  case 4: //pantalla de instrucciones
     dia.resize(1400, 1000);
     image(dia, 0, 0);
     textSize(32);
@@ -332,7 +331,7 @@ FCompound createCage() {
   FBox b9 = new FBox(1500, 10); //arriba
   b9.setPosition(-50, -410);
   b9.setFill(220, 175, 234);
-  b9.setRestitution(1);
+  b9.setRestitution(1.5);
   b9.setNoStroke();
 
   FBox b10 = new FBox(810, 10); //abajo
@@ -345,7 +344,7 @@ FCompound createCage() {
   FBox b11 = new FBox(10, 800); //izq
   b11.setPosition(-400, 0);
   b11.setFill(220, 175, 234);
-  b11.setRestitution(1);
+  b11.setRestitution(1.5);
   b11.setNoStroke();
 
 
@@ -371,7 +370,7 @@ FCompound createCage() {
   FBox b15 = new FBox(10, 200); //vertical-izq3
   b15.setPosition(-680, -150);
   b15.setFill(220, 175, 234);
-  //b15.setRestitution(2.5);
+  b15.setRestitution(1.5);
   b15.setNoStroke();
 
   FBox b16 = new FBox(180, 10); //medio horizontal2
@@ -490,39 +489,38 @@ FCompound createPinche() {
 }
 
 void mouseClicked() {
-   switch (estado) {
-    case 0:
-      if (mouseX > 1090 - 200 && mouseX < 1090 + 200 && mouseY > 700 - 100 && mouseY < 700 + 100) {
-    // Si el clic está dentro del rectángulo, empieza juego
-    estado=1;
-    println("Juego");
+  switch (estado) {
+  case 0:
+    if (mouseX > 1090 - 200 && mouseX < 1090 + 200 && mouseY > 700 - 100 && mouseY < 700 + 100) {
+      // Si el clic está dentro del rectángulo, empieza juego
+      estado=1;
+      println("Juego");
     }
     if (mouseX > 1130 - 200 && mouseX < 1130 + 200 && mouseY > 180 - 100 && mouseY < 180 + 100) {
-    // Si el clic está dentro del rectángulo, empieza juego
-    estado=4;
-    println("Juego");
+      // Si el clic está dentro del rectángulo, empieza juego
+      estado=4;
+      println("Juego");
     }
-      break;
-    case 1:
-      // Estado de juego: código para el clic en el estado de juego
-      // Aquí puedes manejar las interacciones del juego en curso
-      break;
-    case 2:
-  
+    break;
+  case 1:
+    //No hay interacción del mouse
+    break;
+  case 2:
+    //Estado de Perder
     estado=0;
     println("Juego");
-   
-      break;
-    case 3:
-     
+    break;
+
+  case 3:
+    //estado de Victoria
     estado=0;
     println("Juego");
-   
-      break;
-      case 4:
-      estado=1;
-      break;
-  
+    break;
+
+  case 4:
+    //estado de Instrucciones
+    estado=1;
+    break;
   }
 }
 
